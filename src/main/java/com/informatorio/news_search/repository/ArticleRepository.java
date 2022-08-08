@@ -7,6 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.informatorio.news_search.model.ArticleModel;
 
 public interface ArticleRepository extends PagingAndSortingRepository<ArticleModel,Long> {
-    public Page<ArticleModel> findByTitleContainingOrDescriptionContaining
+    public Page<ArticleModel> findByTitleContainingOrDescriptionContainingAndPublishedAtNotNull
         (String title,String description,Pageable pageable);
+    public Page<ArticleModel> findByPublishedAtNotNull(Pageable pageable);
 }

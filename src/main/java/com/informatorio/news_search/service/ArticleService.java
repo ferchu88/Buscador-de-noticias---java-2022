@@ -37,10 +37,11 @@ public class ArticleService {
 
         if(query != null) {
             filterPage = articleRepository
-                .findByTitleContainingOrDescriptionContaining(query, query, pageable);
+                .findByTitleContainingOrDescriptionContainingAndPublishedAtNotNull
+                    (query, query, pageable);
         } else {
             filterPage = articleRepository
-                .findAll(pageable);
+                .findByPublishedAtNotNull(pageable);
         }
         Page<ArticleDTO> articlePage = filterPage
             .map(articleModel -> articleConverter.toDTO(articleModel));

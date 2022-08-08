@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.informatorio.news_search.dto.exception.InvalidFieldExceptionDTO;
+import com.informatorio.news_search.dto.exception.InvalidFieldsDTO;
 import com.informatorio.news_search.dto.exception.NotFoundExceptionDTO;
 import com.informatorio.news_search.exception.EntityNotFoundException;
 
@@ -33,8 +34,8 @@ public class ExceptionController {
         MethodArgumentNotValidException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<InvalidFieldExceptionDTO> invalidArguments(MethodArgumentNotValidException errors) {
-        return errors
+    public InvalidFieldsDTO invalidArguments(MethodArgumentNotValidException errors) {
+        List<InvalidFieldExceptionDTO> errorList = errors
             .getBindingResult()
             .getAllErrors()
             .stream()
@@ -45,6 +46,8 @@ public class ExceptionController {
                 )
             )
             .collect(Collectors.toList());
+
+        return new InvalidFieldsDTO(errorList.size(), errorList);
     }
 
     @ResponseBody
@@ -52,8 +55,8 @@ public class ExceptionController {
         ConstraintViolationException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<InvalidFieldExceptionDTO> invalidParams(ConstraintViolationException errors) {
-        return errors
+    public InvalidFieldsDTO invalidParams(ConstraintViolationException errors) {
+        List<InvalidFieldExceptionDTO> errorList = errors
             .getConstraintViolations()
             .stream()
             .map(e -> new InvalidFieldExceptionDTO(
@@ -61,5 +64,7 @@ public class ExceptionController {
                 e.getMessage()
             ))
             .collect(Collectors.toList());
+
+        return new InvalidFieldsDTO(errorList.size(), errorList);
     }
 }
