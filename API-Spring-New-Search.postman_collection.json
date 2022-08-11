@@ -1,0 +1,928 @@
+{
+	"info": {
+		"_postman_id": "a232d98a-57fa-49df-ab9f-eda58dfce5f3",
+		"name": "API-Spring-New-Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21355463"
+	},
+	"item": [
+		{
+			"name": "Articulos",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Obtener todos (basico)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos segun una palabra clave",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles?query=videojuegos&page=1&size=10",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "videojuegos"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener con parametros mal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles?query=a",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "a"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener uno concreto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener un articulo inexistente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Crear uno nuevo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"noticia de prueba\",\r\n    \"description\": \"una descripcion\",\r\n    \"content\": \"cuerpo de la noticia\",\r\n    \"url\": \"http://url.algo\",\r\n    \"urlToImage\": \"http://url.algo/img.png\",\r\n    \"publishedAt\": \"2020-01-23\",\r\n    \"author\": 1,\r\n    \"source\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/articles",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear con body mal",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"\",\r\n    \"content\": \"\",\r\n    \"url\": \"url.algo\",\r\n    \"urlToImage\": \"http://url.algo/\",\r\n    \"publishedAt\": \"2030-01-23\",\r\n    \"author\": -1,\r\n    \"source\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/articles",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear con autor o fuente inexistentes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"noticia de prueba\",\r\n    \"description\": \"una descripcion\",\r\n    \"content\": \"cuerpo de la noticia\",\r\n    \"url\": \"http://url.algo\",\r\n    \"urlToImage\": \"http://url.algo/img.png\",\r\n    \"publishedAt\": \"2020-01-23\",\r\n    \"author\": 99,\r\n    \"source\": 99\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/articles",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "Modificar uno existente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"noticia de prueba\",\r\n    \"description\": \"una descripcion\",\r\n    \"content\": \"cuerpo de la noticia\",\r\n    \"url\": \"http://url.algo\",\r\n    \"urlToImage\": \"http://url.algo/img.png\",\r\n    \"publishedAt\": \"2020-01-23\",\r\n    \"author\": 1,\r\n    \"source\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/articles/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar uno inexistente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"noticia de prueba\",\r\n    \"description\": \"una descripcion\",\r\n    \"content\": \"cuerpo de la noticia\",\r\n    \"url\": \"http://url.algo\",\r\n    \"urlToImage\": \"http://url.algo/img.png\",\r\n    \"publishedAt\": \"2020-01-23\",\r\n    \"author\": 1,\r\n    \"source\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/articles/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"999"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar con autor o fuente inexistente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"noticia de prueba\",\r\n    \"description\": \"una descripcion\",\r\n    \"content\": \"cuerpo de la noticia\",\r\n    \"url\": \"http://url.algo\",\r\n    \"urlToImage\": \"http://url.algo/img.png\",\r\n    \"publishedAt\": \"2020-01-23\",\r\n    \"author\": 99,\r\n    \"source\": 99\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/articles/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Eliminar uno existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles/14",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"14"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar uno inexistente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/articles/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"articles",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Fuentes",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Obtener todos (basico)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos segun una palabra clave",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources?query=vandal&page=1&size=10",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "vandal"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener con parametros mal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources?query=a&page=&size=",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "a"
+										},
+										{
+											"key": "page",
+											"value": ""
+										},
+										{
+											"key": "size",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener uno concreto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener uno inexistente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Crear uno nuevo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"una fuente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/sources",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear con body mal",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/sources",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "Modificar uno existente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"otra fuente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/sources/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar uno inexistente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"otra fuente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/sources/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Eliminar uno existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar uno inexistente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/sources/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"sources",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Autores",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Obtener todos (basico)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos segun una palabra clave",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors?query=Ezequiel&page=1&size=10",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "Ezequiel"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener segun una fecha dada",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors?dateStr=2022-07-28&page=1&size=10",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors"
+									],
+									"query": [
+										{
+											"key": "dateStr",
+											"value": "2022-07-28"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener con parametros mal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors?query=a&dateStr=",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "a"
+										},
+										{
+											"key": "dateStr",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener uno concreto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener uno inexistente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Crear uno nuevo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Ezequiel\",\r\n    \"lastName\": \"Manfredi\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/authors",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear con body mal",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/authors",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "Modificar uno existente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Carlos\",\r\n    \"lastName\": \"Manfredi\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/authors/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar uno inexistente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Ezequiel\",\r\n    \"lastName\": \"Manfredi\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/authors/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "Eliminar uno existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar uno inexistente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{domain}}/authors/999",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"authors",
+										"999"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
