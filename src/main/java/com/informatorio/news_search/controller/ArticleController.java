@@ -34,8 +34,8 @@ public class ArticleController {
     @ResponseStatus(HttpStatus.OK)
     public ArticlePageDTO allArticles(
         @RequestParam(required = false) @Size(min = 3) String query, 
-        @RequestParam @Positive Integer page, 
-        @RequestParam @Positive Integer size
+        @RequestParam(required = false, defaultValue = "1") @Positive Integer page, 
+        @RequestParam(required = false, defaultValue = "10") @Positive Integer size
     ) {
         if(query != null) {
             return articleService.getAll(page, size, query);

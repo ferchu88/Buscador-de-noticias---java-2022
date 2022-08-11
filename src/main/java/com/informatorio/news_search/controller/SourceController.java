@@ -34,8 +34,8 @@ public class SourceController {
     @ResponseStatus(HttpStatus.OK)
     public SourcePageDTO allSource(
         @RequestParam(required = false) @Size(min = 3) String query, 
-        @RequestParam @Positive Integer page, 
-        @RequestParam @Positive Integer size
+        @RequestParam(required = false, defaultValue = "1") @Positive Integer page, 
+        @RequestParam(required = false, defaultValue = "10") @Positive Integer size
     ) {
         if(query != null) {
             return sourceService.getAll(page, size, query);
