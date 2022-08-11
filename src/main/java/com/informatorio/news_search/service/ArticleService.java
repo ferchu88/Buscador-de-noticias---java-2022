@@ -37,7 +37,7 @@ public class ArticleService {
 
         if(query != null) {
             filterPage = articleRepository
-                .findByTitleContainingOrDescriptionContainingAndPublishedAtNotNull
+                .findByPublishedAtNotNullAndTitleContainingOrPublishedAtNotNullAndDescriptionContaining
                     (query, query, pageable);
         } else {
             filterPage = articleRepository
