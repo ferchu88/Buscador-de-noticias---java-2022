@@ -43,7 +43,6 @@ public class SourceService {
                 sourceModel, 
                 sourceModel
                     .getArticles()
-                    .subList(0, 5)
                     .stream()
                     .map(articleModel -> articleConverter.toBaseDTO(articleModel))
                     .collect(Collectors.toList())
@@ -67,7 +66,6 @@ public class SourceService {
                 sourceModel.get(), 
                 sourceModel.get()
                     .getArticles()
-                    .subList(0, 5)
                     .stream()
                     .map(articleModel -> articleConverter.toBaseDTO(articleModel))
                     .collect(Collectors.toList())

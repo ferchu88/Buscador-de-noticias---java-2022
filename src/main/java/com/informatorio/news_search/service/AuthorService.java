@@ -47,7 +47,6 @@ public class AuthorService {
                 authorModel, 
                 authorModel
                     .getArticles()
-                    .subList(0, 5)
                     .stream()
                     .map(articleModel -> articleConverter.toBaseDTO(articleModel))
                     .collect(Collectors.toList())
@@ -71,7 +70,6 @@ public class AuthorService {
                 authorModel.get(), 
                 authorModel.get()
                     .getArticles()
-                    .subList(0, 5)
                     .stream()
                     .map(articleModel -> articleConverter.toBaseDTO(articleModel))
                     .collect(Collectors.toList()
